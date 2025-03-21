@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-neo",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Nodes for connecting to the NEO Framework",
   "dependencies": {
     "node-fetch": "^2.6.1"
@@ -17,6 +17,6 @@
       "neo-call-method": "neo-call-method.js"
     }
   },
-  "author": "Seu Nome",
+  "author": "MTM Tecnologia",
   "license": "MIT"
 }
