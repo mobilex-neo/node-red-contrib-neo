@@ -1,0 +1,30 @@
+<script type="text/javascript">
+    RED.nodes.registerType("neo-call-method", {
+        category: "NEO",
+        color: "#a6bbcf",
+        defaults: {
+            methodName: { value: "" },
+            httpMethod: { value: "GET" }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "font-awesome/fa-code",
+        label: function () {
+            return this.name || "NEO Call Method";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="neo-call-method">
+    <div class="form-row">
+        <label for="node-input-methodName"><i class="fa fa-terminal"></i> Method Name</label>
+        <input type="text" id="node-input-methodName">
+    </div>
+    <div class="form-row">
+        <label for="node-input-httpMethod"><i class="fa fa-cogs"></i> HTTP Method</label>
+        <select id="node-input-httpMethod">
+            <option value="GET">GET</option>
+            <option value="POST">POST</option>
+        </select>
+    </div>
+</script>
