@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-neo",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Nodes for connecting to the NEO Framework",
   "dependencies": {
     "node-fetch": "^2.6.1"
@@ -8,13 +8,15 @@
   "keywords": [
     "node-red",
     "neo",
+    "mobilex",
     "api"
   ],
   "node-red": {
     "nodes": {
       "neo-auth": "neo-auth.js",
       "neo-request": "neo-request.js",
-      "neo-call-method": "neo-call-method.js"
+      "neo-call-method": "neo-call-method.js",
+      "neo-hook-listener": "neo-hook-listener.js"
     }
   },
   "author": "MTM Tecnologia",

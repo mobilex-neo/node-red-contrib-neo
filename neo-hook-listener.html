@@ -1,0 +1,27 @@
+<script type="text/javascript">
+    RED.nodes.registerType("neo-hook-listener", {
+        category: "NEO",
+        color: "#a6bbcf",
+        defaults: {
+            accessKey: { value: "" },
+            methodName: { value: "" }
+        },
+        inputs: 0,
+        outputs: 1,
+        icon: "font-awesome/fa-plug",
+        label: function () {
+            return this.name || "NEO Hook Listener";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="neo-hook-listener">
+    <div class="form-row">
+        <label for="node-input-accessKey"><i class="fa fa-key"></i> Access Key</label>
+        <input type="text" id="node-input-accessKey">
+    </div>
+    <div class="form-row">
+        <label for="node-input-methodName"><i class="fa fa-code"></i> Method Name</label>
+        <input type="text" id="node-input-methodName">
+    </div>
+</script>
