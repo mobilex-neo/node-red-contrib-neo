@@ -77,4 +77,3 @@ MIT
 Desenvolvido por Luiz Carvalho / MTM Tecnologia
 
 GitHub: [github.com/mobilex-neo](https://github.com/mobilex-neo)
-
