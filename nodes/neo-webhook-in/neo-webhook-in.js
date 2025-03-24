@@ -1,36 +1,21 @@
-const NeoClient = require('../../lib/neo-client');
-
 module.exports = function (RED) {
-  function NeoWatchDoctypeNode(config) {
+  function NeoWebhookInNode(config) {
     RED.nodes.createNode(this, config);
     const node = this;
 
-    const interval = parseInt(config.interval) || 30;
-    let polling = null;
-    let lastCheck = new Date().toISOString();
+    RED.httpNode.post(`/neo-webhook/${config.endpoint}`, RED.bodyParser.json(), function (req, res) {
+      const event = {
+        headers: req.headers,
+        payload: req.body
+      };
+      node.send({ payload: event });
+      res.status(200).send({ status: 'ok' });
+    });
 
-    function startPolling() {
-      polling = setInterval(async () => {
-        try {
-          const client = new NeoClient(config.baseURL, config.token);
-          const res = await client.query(config.doctype, [["modified", ">", lastCheck]]);
-          lastCheck = new Date().toISOString();
-
-          res.forEach(doc => {
-            node.send({ payload: doc });
-          });
-        } catch (e) {
-          node.error("Erro no watch-doctype: " + e.message);
-        }
-      }, interval * 1000);
-    }
-
-    startPolling();
-
-    node.on("close", () => {
-      if (polling) clearInterval(polling);
+    node.on('close', function () {
+      // cleanup se necessário
     });
   }
 
-  RED.nodes.registerType("neo-watch-doctype", NeoWatchDoctypeNode);
+  RED.nodes.registerType("neo-webhook-in", NeoWebhookInNode);
 };
