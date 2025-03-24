@@ -1,24 +1,49 @@
 {
   "name": "node-red-contrib-neo",
-  "version": "1.0.4",
-  "description": "Nodes for connecting to the NEO Framework",
-  "dependencies": {
-    "node-fetch": "^2.6.1"
-  },
+  "version": "1.0.7",
+  "description": "Conjunto de nós Node-RED para integração com a plataforma NEO Framework.",
+  "author": "Luiz Carvalho <dev@mtmtecnologia.com.br>",
+  "license": "MIT",
   "keywords": [
     "node-red",
     "neo",
-    "mobilex",
-    "api"
+    "neo-framework",
+    "erp",
+    "automation",
+    "low-code"
   ],
   "node-red": {
     "nodes": {
-      "neo-auth": "neo-auth.js",
-      "neo-request": "neo-request.js",
-      "neo-call-method": "neo-call-method.js",
-      "neo-hook-listener": "neo-hook-listener.js"
+      "neo-auth": "nodes/neo-auth/neo-auth.js",
+      "neo-call-method": "nodes/neo-call-method/neo-call-method.js",
+      "neo-request": "nodes/neo-request/neo-request.js",
+      "neo-get-doc": "nodes/neo-get-doc/neo-get-doc.js",
+      "neo-create-doc": "nodes/neo-create-doc/neo-create-doc.js",
+      "neo-update-doc": "nodes/neo-update-doc/neo-update-doc.js",
+      "neo-delete-doc": "nodes/neo-delete-doc/neo-delete-doc.js",
+      "neo-query": "nodes/neo-query/neo-query.js",
+      "neo-submit-doc": "nodes/neo-submit-doc/neo-submit-doc.js",
+      "neo-workflow-action": "nodes/neo-workflow-action/neo-workflow-action.js",
+      "neo-webhook-in": "nodes/neo-webhook-in/neo-webhook-in.js",
+      "neo-watch-doctype": "nodes/neo-watch-doctype/neo-watch-doctype.js"
     }
   },
-  "author": "MTM Tecnologia",
-  "license": "MIT"
+  "dependencies": {
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node-red",
+    "lint": "eslint nodes/**/*.js lib/**/*.js",
+    "test": "mocha tests/**/*.test.js",
+    "build": "npm install && npm run lint && npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mobilex-neo/node-red-contrib-neo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mobilex-neo/node-red-contrib-neo/issues"
+  },
+  "homepage": "https://github.com/mobilex-neo/node-red-contrib-neo"
 }
