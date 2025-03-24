@@ -1,39 +1,55 @@
-// node-red-contrib-neo
-// Este módulo implementa nós para conectar ao NEO Framework no Node-RED
-
-const fetch = require('node-fetch');
+const NeoClient = require('../../lib/neo-client');
 
 module.exports = function (RED) {
-    function NeoAuthNode(config) {
-        RED.nodes.createNode(this, config);
-        const node = this;
-        node.apiKey = config.apiKey;
-        node.apiSecret = config.apiSecret;
-        node.uri = config.uri;
-        
-        node.on('input', async function (msg) {
-            try {
-                const authHeaders = {
-                    'Authorization': `token ${node.apiKey}:${node.apiSecret}`
-                };
-                const response = await fetch(`${node.uri}/api/method/get_auth_user`, {
-                    method: 'GET',
-                    headers: authHeaders
-                });
-                const data = await response.json();
-                
-                if (data.data && data.data.user !== 'Gest') {
-                    msg.session = authHeaders;
-                    msg.neoInstance = `${node.uri}`;
-                    msg.payload = { user: data.data.user, uri:`${node.uri}` };
-                } else {
-                    msg.payload = { error: 'Invalid Credentials' };
-                }
-            } catch (error) {
-                msg.payload = { error: error.message };
-            }
-            node.send(msg);
-        });
-    }
-    RED.nodes.registerType("neo-auth", NeoAuthNode);
+  function NeoAuthNode(config) {
+    RED.nodes.createNode(this, config);
+    const node = this;
+
+    node.on("input", async function (msg) {
+      const baseURL = config.baseURL || msg.neo?.baseURL;
+      const authType = config.authType || msg.neo?.authType || "login";
+
+      if (!baseURL) {
+        node.error("Base URL não informada.");
+        return;
+      }
+
+      let client;
+      try {
+        if (authType === "apikey") {
+          const apiKey = config.apiKey || msg.neo?.apiKey;
+          const apiSecret = config.apiSecret || msg.neo?.apiSecret;
+
+          if (!apiKey || !apiSecret) {
+            throw new Error("API Key e Secret são obrigatórios.");
+          }
+
+          client = new NeoClient(baseURL, { apiKey, apiSecret });
+        } else {
+          const username = config.username || msg.neo?.username || msg.payload?.usr;
+          const password = config.password || msg.neo?.password || msg.payload?.pwd;
+
+          if (!username || !password) {
+            throw new Error("Usuário e senha são obrigatórios.");
+          }
+
+          client = new NeoClient(baseURL);
+          await client.login(username, password);
+        }
+
+        msg.neo = {
+          token: client.token,
+          client,
+          baseURL,
+          authType
+        };
+
+        node.send(msg);
+      } catch (err) {
+        node.error("Erro na autenticação NEO: " + err.message);
+      }
+    });
+  }
+
+  RED.nodes.registerType("neo-auth", NeoAuthNode);
 };
