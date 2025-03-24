@@ -18,7 +18,7 @@ module.exports = function (RED) {
 
       try {
         const client = new NeoClient(baseURL, token);
-        const result = await client.callMethod(`frappe.client.submit`, {
+        const result = await client.callMethod(`neo.client.submit`, {
           doc: { doctype, name }
         });
         msg.payload = result;
