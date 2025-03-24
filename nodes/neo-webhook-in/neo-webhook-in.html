@@ -1,0 +1,23 @@
+<script type="text/javascript">
+	RED.nodes.registerType('neo-webhook-in', {
+	  category: 'NEO',
+	  color: '#FFCCCC',
+	  inputs: 0,
+	  outputs: 1,
+	  icon: 'alert.png',
+	  label: function () {
+		return this.name || 'neo-webhook-in';
+	  },
+	  defaults: {
+		name: { value: '' },
+		endpoint: { value: '', required: true }
+	  }
+	});
+  </script>
+  
+  <div class="form-row">
+	<label>Webhook Endpoint</label>
+	<input type="text" name="endpoint" placeholder="ex: vendas">
+	<p>URL final: /neo-webhook/&lt;endpoint&gt;</p>
+  </div>
+  

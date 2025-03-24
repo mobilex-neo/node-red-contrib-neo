@@ -1,0 +1,32 @@
+<script type="text/javascript">
+	RED.nodes.registerType('neo-delete-doc', {
+	  category: 'NEO',
+	  color: '#FFD6D6',
+	  inputs: 1,
+	  outputs: 1,
+	  icon: 'trash.png',
+	  label: function () {
+		return this.name || 'neo-delete-doc';
+	  },
+	  defaults: {
+		name: { value: '' },
+		doctype: { value: '', required: true },
+		name: { value: '', required: true },
+		baseURL: { value: '' }
+	  }
+	});
+  </script>
+  
+  <div class="form-row">
+	<label for="doctype">Doctype</label>
+	<input type="text" name="doctype" placeholder="Ex: Customer" required="required">
+  </div>
+  <div class="form-row">
+	<label for="name">Document Name</label>
+	<input type="text" name="name" placeholder="Ex: CUST-0001">
+  </div>
+  <div class="form-row">
+	<label for="baseURL"">Base URL</label>
+	<input type="text" name="baseURL" placeholder="https://neo.suaempresa.com.br">
+  </div>
+       

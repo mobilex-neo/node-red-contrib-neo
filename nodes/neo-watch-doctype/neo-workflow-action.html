@@ -1,0 +1,37 @@
+<script type="text/javascript">
+	RED.nodes.registerType('neo-workflow-action', {
+	  category: 'NEO',
+	  color: '#D0E0E3',
+	  inputs: 1,
+	  outputs: 1,
+	  icon: 'gear.png',
+	  label: function () {
+		return this.name || 'neo-workflow-action';
+	  },
+	  defaults: {
+		name: { value: '' },
+		doctype: { value: '', required: true },
+		name: { value: '', required: true },
+		action: { value: '', required: true },
+		baseURL: { value: '' }
+	  }
+	});
+  </script>
+  
+  <div class="form-row">
+	<label for="doctype">Doctype</label>
+	<input  type="text" name="doctype" id="doctype" placeholder="Ex: Customer" required="required"">
+  </div>
+  <div class="form-row">
+	<label for="name">Document Name</label>
+	<input type="text" name="name" id="name" placeholder="Ex: CUST-0001" required="required"">
+  </div>
+  <div class="form-row">
+	<label for="action">Workflow Action</label>
+	<input type="text" name="action" placeholder="Ex: Aprovar, Rejeitar" id="action" required="required">
+  </div>
+  <div class="form-row">
+	<label for="baseURL">Base URL</label>
+	<input type="text" name="baseURL" id="baseURL" placeholder="https://neo.suaempresa.com.br">
+  </div>
+  
