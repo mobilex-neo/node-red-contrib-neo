@@ -11,7 +11,6 @@ module.exports = function (RED) {
         node.method = config.method;
         node.doctype = config.doctype;
         node.docname = config.docname;
-        node.name = config.name;
         node.on('input', async function (msg) {
             try {
                 const session = msg.session || {};

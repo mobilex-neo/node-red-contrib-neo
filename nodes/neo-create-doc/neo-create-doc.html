@@ -4,24 +4,25 @@
 	  color: '#C6E2FF',
 	  inputs: 1,
 	  outputs: 1,
-	  icon: 'file.png',
+	  icon: 'font-awesome/fa-file',
 	  label: function () {
 		return this.name || 'neo-create-doc';
 	  },
 	  defaults: {
-		name: { value: '' },
 		doctype: { value: '', required: true },
 		baseURL: { value: '' }
 	  }
 	});
   </script>
   
+<script  type="text/html" data-template-name="neo-create-doc">
   <div class="form-row">
 	<label>Doctype</label>
-	<input type="text" name="doctype" placeholder="Ex: Sales Order">
+	<input type="text" name="node-input-doctype" placeholder="Ex: Sales Order">
   </div>
   <div class="form-row">
 	<label>Base URL</label>
-	<input type="text" name="baseURL" placeholder="https://neo.suaempresa.com.br">
+	<input type="text" name="node-input-baseURL" placeholder="https://neo.suaempresa.com.br">
   </div>
+  </script>
   

@@ -7,11 +7,11 @@ module.exports = function (RED) {
 
     node.on('input', async function (msg) {
       const doctype = config.doctype || msg.doctype;
-      const name = config.name || msg.name;
+      const docname = config.docname || msg.docname;
       const token = msg.neo?.token;
       const baseURL = config.baseURL || msg.neo?.baseURL;
 
-      if (!doctype || !name || !baseURL || !token) {
+      if (!doctype || !docname || !baseURL || !token) {
         node.error("Campos obrigatórios ausentes: doctype, name, token ou baseURL.");
         return;
       }
@@ -19,7 +19,7 @@ module.exports = function (RED) {
       try {
         const client = new NeoClient(baseURL, token);
         const result = await client.callMethod(`neo.client.submit`, {
-          doc: { doctype, name }
+          doc: { doctype, docname }
         });
         msg.payload = result;
         node.send(msg);

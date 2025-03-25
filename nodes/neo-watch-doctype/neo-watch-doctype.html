@@ -4,7 +4,7 @@
       color: '#FCE5CD',
       inputs: 0,
       outputs: 1,
-      icon: 'watch.png',
+      icon: 'font-awesome/fa-eye',
       label: function () {
         return this.name || 'neo-watch-doctype';
       },
@@ -18,20 +18,24 @@
     });
   </script>
   
+
+
+<script  type="text/html" data-template-name="neo-watch-doctype">
   <div class="form-row">
-    <label>Doctype</label>
-    <input type="text" name="doctype">
+    <label for="node-input-doctype">Doctype</label>
+    <input type="text" name="node-input-doctype" id="node-input-doctype" placeholder="Ex: Customer" required="required">
   </div>
   <div class="form-row">
-    <label>Intervalo (s)</label>
-    <input type="number" name="interval" value="30">
+    <label for="node-input-interval">Intervalo (s)</label>
+    <input type="number" name="node-input-interval" value="30" max="3600" min="1" step="1" id="node-input-interval">
   </div>
   <div class="form-row">
-    <label>Base URL</label>
-    <input type="text" name="baseURL">
+    <label for="node-input-baseURL">Base URL</label>
+    <input type="text" name="node-input-baseURL" id="node-input-baseURL" placeholder="https://neo.suaempresa.com.br">
   </div>
   <div class="form-row">
-    <label>Token (Cookie)</label>
-    <input type="text" name="token">
+    <label for="node-input-token">Token (Cookie)</label>
+    <input type="text" name="node-input-token" id="node-input-token">
   </div>
+  </script>
   
