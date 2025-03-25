@@ -7,7 +7,7 @@ module.exports = function (RED) {
 
     node.on('input', async function (msg) {
       const doctype = config.doctype || msg.doctype;
-      const docname = config.name || msg.name;
+      const docname = config.docname || msg.docname;
       const token = msg.neo?.token;
       const baseURL = config.baseURL || msg.neo?.baseURL;
 

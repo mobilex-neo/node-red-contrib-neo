@@ -1,79 +1,292 @@
-# node-red-contrib-neo
+# NEO mobileX Code-Flow package
 
-Nós personalizados para integrar o [NEO Framework](https://github.com/mobilex-neo) ao Node-RED.
+**node-red-contrib-neo** é um conjunto de nós para o **Node-RED**, permitindo integração direta com a plataforma **NEO Framework**. 
 
-Permite autenticar e realizar operações CRUD (Create, Read, Update, Delete), além de chamar métodos customizados via API REST do NEO.
+## Instalação 
 
-## Recursos
+Para instalar diretamente via Node-RED, acesse o menu **Gerenciar Paleta** e procure por: 
 
-- Autenticação via API Key
-- Requisições REST a recursos do NEO (GET, POST, PUT, DELETE)
-- Execução de métodos customizados (via `call_method`)
-
-## Instalação
-
-### Via Gerenciador do Node-RED
-
-1. Acesse o Node-RED.
-2. Clique em **Menu → Gerenciar Paleta → Instalar**.
-3. Procure por `node-red-contrib-neo` e clique em **Instalar**.
-
-### Via Terminal (Manual)
-
-```bash
-cd ~/.node-red
-npm install node-red-contrib-neo
 ```
+node-red-contrib-neo 
+``` 
 
-Reinicie o Node-RED após a instalação.
+Ou instale manualmente via terminal: 
 
-## Como Usar
+```sh 
+cd ~/.node-red npm install 
+node-red-contrib-neo 
+``` 
 
-### Nó: NEO Auth (`neo-auth`)
+Se estiver utilizando um pacote local: 
 
-Autentica no NEO utilizando uma API Key e Secret. O resultado é um cabeçalho de sessão armazenado em `msg.session`.
+```sh
+cd ~/.node-red 
+npm install /caminho/para/seu/pacote/node-red-contrib-neo
+``` 
 
-**Inputs:**
-- `msg` (ignorado)
+Após a instalação, reinicie o Node-RED: 
 
-**Outputs:**
-- `msg.session` com cabeçalho de autorização
-- `msg.payload.user` com o nome do usuário autenticado
+```sh 
+node-red-stop 
+node-red-start 
+``` 
 
-### Nó: NEO Request (`neo-request`)
+## Configuração dos Nós
 
-Realiza chamadas REST para recursos do NEO (por exemplo: `GET`, `POST`, `PUT`, `DELETE` em um `doctype`).
+Os seguintes nós estão disponíveis: 
 
-**Inputs:**
-- `msg.session` (token de autenticação gerado pelo `neo-auth`)
-- `msg.payload` (dados da requisição)
+### 1️⃣ **Autenticação (`neo-auth`)** 
 
-**Outputs:**
-- `msg.payload` com a resposta da API
+Realiza autenticação com a plataforma NEO. 
 
-### Nó: NEO Call Method (`neo-call-method`)
+| Campo | Descrição | 
+|-------------|----------| 
+| **Base URL** | URL da instância do NEO | 
+| **Tipo de Autenticação** | `login` ou `apikey` | 
+| **Usuário** | (Caso `login`) Nome de usuário | 
+| **Senha** | (Caso `login`) Senha do usuário | 
+| **API Key** | (Caso `apikey`) Chave da API | 
+| **API Secret** | (Caso `apikey`) Segredo da API | 
 
-Executa um método customizado exposto via `/api/method` no backend do NEO.
+### 2️⃣ **Obter Documento (`neo-get-doc`)** 
 
-**Inputs:**
-- `msg.session` (token de autenticação)
-- `msg.payload` (dados da requisição - usado no POST)
+Recupera um documento específico de um **Doctype**. 
 
-**Outputs:**
-- `msg.payload` com a resposta
+| Campo | Descrição | 
+|-------------|----------| 
+| **Doctype** | Nome do Doctype a ser consultado | 
+| **Nome do Documento** | Identificador do documento |
 
-## Exemplo de Fluxo
+### 3️⃣ **Criar Documento (`neo-create-doc`)** 
+ 
+Cria um novo documento em um Doctype. 
+ 
+| Campo | Descrição | 
+|-------------|----------| 
+| **Doctype** | Nome do Doctype | 
+| **Payload** | Dados do documento em formato JSON | 
+ 
+### 4️⃣ **Atualizar Documento (`neo-update-doc`)**
+ 
+Atualiza um documento existente. 
 
-```text
-[inject] → [neo-auth] → [function set msg.payload] → [neo-request] → [debug]
-```
+| Campo | Descrição | 
+|-------------|----------| 
+| **Doctype** | Nome do Doctype | 
+| **Nome do Documento** | ID do documento | 
+| **Payload** | Dados a serem atualizados | 
+ 
+### 5️⃣ **Deletar Documento (`neo-delete-doc`)**
+ 
+Exclui um documento do sistema. 
+ 
+| Campo | Descrição | 
+|-------------|----------| 
+| **Doctype** | Nome do Doctype | 
+| **Nome do Documento** | ID do documento | 
+ 
+### 6️⃣ **Consultar (`neo-query`)** 
+ 
+Realiza queries na base do NEO Framework. 
+ 
+| Campo | Descrição | 
+|-------------|----------| 
+| **Query** | Filtro em formato JSON para busca | 
+ 
+### 7️⃣ **Submeter Documento (`neo-submit-doc`)** 
+ 
+Submete um documento para workflow. 
+ 
+| Campo | Descrição | 
+|-------------|----------| 
+| **Doctype** | Nome do Doctype | 
+| **Nome do Documento** | ID do documento | 
+ 
+### 8️⃣ **Ação de Workflow (`neo-workflow-action`)** 
+ 
+Executa uma ação de workflow em um documento. 
+ 
+| Campo | Descrição | 
+|-------------|----------| 
+| **Doctype** | Nome do Doctype | 
+| **Nome do Documento** | ID do documento | 
+| **Ação** | Nome da ação a ser executada | 
+ 
+### 9️⃣ **Webhook (`neo-webhook-in`)** 
+ 
+Recebe requisições via Webhook e aciona um fluxo no Node-RED. 
+ 
+| Campo | Descrição |
+|-------------|----------| 
+| **Endpoint** | URL onde o webhook receberá chamadas | 
+ 
+### 🔟 **Monitoramento de Doctype (`neo-watch-doctype`)** 
+ 
+Fica "escutando" mudanças em um Doctype e aciona fluxos automaticamente. 
+ 
+| Campo | Descrição | 
+|-------------|----------| 
+| **Doctype** | Nome do Doctype a ser monitorado | 
+ 
+## Exemplo de Uso 
+ 
+1. **Autenticar** com o `neo-auth` 
+ 
+2. **Obter um documento** usando `neo-get-doc` 
+ 
+3. **Atualizar o documento** com `neo-update-doc` 
+ 
+4. **Submeter o documento** com `neo-submit-doc` 
+ 
+5. **Monitorar mudanças** com `neo-watch-doctype` 
+ 
+### **Exemplo de fluxo no Node-RED** 
+ 
+```json 
+[
+    {
+        "id": "auth-node",
+        "type": "neo-auth",
+        "z": "8959adaf4ee2f633",
+        "name": "Autenticação NEO",
+        "baseURL": "https://neo.mobilex.tech",
+        "authType": "apikey",
+        "username": "",
+        "password": "",
+        "apiKey": "0ce3c3b3c35338",
+        "apiSecret": "550ba4334c6347d",
+        "x": 390,
+        "y": 40,
+        "wires": [
+            [
+                "get-doc-node"
+            ]
+        ]
+    },
+    {
+        "id": "get-doc-node",
+        "type": "neo-get-doc",
+        "z": "8959adaf4ee2f633",
+        "name": "Buscar Documento",
+        "doctype": "User",
+        "docname": "guest",
+        "baseURL": "https://neo.mobilex.tech",
+        "x": 610,
+        "y": 40,
+        "wires": [
+            [
+                "772eabb85a0fad44"
+            ]
+        ]
+    },
+    {
+        "id": "update-doc-node",
+        "type": "neo-update-doc",
+        "z": "8959adaf4ee2f633",
+        "name": "Atualizar Cliente",
+        "doctype": "User",
+        "docname": "guest",
+        "baseURL": "https://neo.mobilex.tech",
+        "x": 580,
+        "y": 160,
+        "wires": [
+            [
+                "1743336da241660d"
+            ]
+        ]
+    },
+    {
+        "id": "a1a104e2408dba02",
+        "type": "inject",
+        "z": "8959adaf4ee2f633",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 40,
+        "wires": [
+            [
+                "auth-node"
+            ]
+        ]
+    },
+    {
+        "id": "1743336da241660d",
+        "type": "debug",
+        "z": "8959adaf4ee2f633",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "772eabb85a0fad44",
+        "type": "function",
+        "z": "8959adaf4ee2f633",
+        "name": "function 1",
+        "func": "msg.payload['middle_name']='TESTE';\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 100,
+        "wires": [
+            [
+                "update-doc-node"
+            ]
+        ]
+    }
+] 
+``` 
+ 
+## **Erros Comuns e Soluções** 
+ 
+| Erro | Possível Causa | Solução | 
+|------|--------------|---------| 
+| `MODULE_NOT_FOUND` | Dependências não instaladas | Execute `npm install` no diretório do projeto | 
+| Inputs não aparecem | Problema no HTML dos nós | Verifique se `node-input-<campo>` está corretamente definido | 
+| Fluxo não funciona | Problema de autenticação | Certifique-se de que a URL, usuário e senha estão corretos | 
+ 
+## Contribuição 
+ 
+Se quiser contribuir, faça um fork do projeto e envie um Pull Request! 
+ 
+```sh 
+ git clone https://github.com/mobilex-neo/node-red-contrib-neo.git 
+ cd node-red-contrib-neo 
+ npm install
+``` 
 
+ 
 ## Licença
 
-MIT
+Este projeto é licenciado sob a licença **MIT**. 
 
-## Autor
+---
 
-Desenvolvido por Luiz Carvalho / MTM Tecnologia
-
-GitHub: [github.com/mobilex-neo](https://github.com/mobilex-neo)
+**Desenvolvido por mobileX para integração com NEO Framework.**

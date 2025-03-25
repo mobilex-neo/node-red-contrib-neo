@@ -1,17 +1,10 @@
 {
   "name": "node-red-contrib-neo",
-  "version": "1.0.8",
+  "version": "1.1.6",
   "description": "Conjunto de nós Node-RED para integração com a plataforma NEO Framework.",
   "author": "Luiz Carvalho <dev@mtmtecnologia.com.br>",
   "license": "MIT",
-  "keywords": [
-    "node-red",
-    "neo",
-    "neo-framework",
-    "erp",
-    "automation",
-    "low-code"
-  ],
+  "keywords": ["node-red", "neo", "neo-framework", "erp", "automation", "low-code"],
   "node-red": {
     "nodes": {
       "neo-auth": "nodes/neo-auth/neo-auth.js",
@@ -29,9 +22,10 @@
     }
   },
   "dependencies": {
-    "axios": "^1.6.0"
+    "axios": "^1.6.0",
+    "node-red": "^3.1.0",
+    "express": "^4.17.3" 
   },
-  "devDependencies": {},
   "scripts": {
     "start": "node-red",
     "lint": "eslint nodes/**/*.js lib/**/*.js",

@@ -1,62 +1,63 @@
 <script type="text/javascript">
-    RED.nodes.registerType('neo-auth', {
+  RED.nodes.registerType('neo-auth', {
       category: 'NEO',
       color: '#E6E0F8',
       inputs: 1,
       outputs: 1,
-      icon: 'key.png',
+      icon: 'font-awesome/fa-key',
       label: function () {
-        return this.name || 'neo-auth';
+          return this.name || 'neo-auth';
       },
       defaults: {
-        name: { value: '' },
-        baseURL: { value: '', required: true },
-        authType: { value: 'login' },
-        username: { value: '' },
-        password: { value: '' },
-        apiKey: { value: '' },
-        apiSecret: { value: '' }
+          name: { value: '' },
+          baseURL: { value: '', required: true },
+          authType: { value: 'apikey' },
+          username: { value: '' },
+          password: { value: '' },
+          apiKey: { value: '' },
+          apiSecret: { value: '' }
       },
       oneditprepare: function () {
-        $("#node-input-authType").on("change", function () {
-          const selected = $(this).val();
-          $(".login-fields").toggle(selected === "login");
-          $(".apikey-fields").toggle(selected === "apikey");
-        }).trigger("change");
+          $("#node-input-authType").on("change", function () {
+              const selected = $(this).val();
+              $(".login-fields").toggle(selected === "login");
+              $(".apikey-fields").toggle(selected === "apikey");
+          }).trigger("change");
       }
-    });
-  </script>
-  
+  });
+</script>
+
+
+
+<script  type="text/html" data-template-name="neo-auth">
   <div class="form-row">
-    <label>Base URL</label>
-    <input type="text" name="baseURL" id="node-input-baseURL" placeholder="https://neo.exemplo.com">
+    <label for="node-input-baseURL">Base URL</label>
+    <input type="text" id="node-input-baseURL" placeholder="https://neo.exemplo.com">
   </div>
-  
+
   <div class="form-row">
-    <label>Tipo de Autenticação</label>
-    <select id="node-input-authType" name="authType">
-      <option value="login">Login / Senha</option>
-      <option value="apikey">API Key + Secret</option>
+    <label for="node-input-authType">Tipo de Autenticação</label>
+    <select id="node-input-authType">
+        <!--<option value="login">Login e Senha</option>-->
+        <option value="apikey">API Key</option>
     </select>
   </div>
-  
+
   <div class="form-row login-fields">
-    <label>Usuário</label>
-    <input type="text" name="username" id="node-input-username">
+    <label for="node-input-username">Usuário</label>
+    <input type="text" id="node-input-username">
   </div>
-  
   <div class="form-row login-fields">
-    <label>Senha</label>
-    <input type="password" name="password" id="node-input-password">
+    <label for="node-input-password">Senha</label>
+    <input type="password" id="node-input-password">
   </div>
-  
+
   <div class="form-row apikey-fields" style="display: none;">
-    <label>API Key</label>
-    <input type="text" name="apiKey" id="node-input-apiKey">
+    <label for="node-input-apiKey">API Key</label>
+    <input type="text" id="node-input-apiKey">
   </div>
-  
   <div class="form-row apikey-fields" style="display: none;">
-    <label>API Secret</label>
-    <input type="text" name="apiSecret" id="node-input-apiSecret">
+    <label for="node-input-apiSecret">API Secret</label>
+    <input type="text" id="node-input-apiSecret">
   </div>
-  
+</script>

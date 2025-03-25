@@ -4,29 +4,32 @@
 	  color: '#FFF2CC',
 	  inputs: 1,
 	  outputs: 1,
-	  icon: 'file.png',
+	  icon: 'font-awesome/fa-file',
 	  label: function () {
 		return this.name || 'neo-update-doc';
 	  },
 	  defaults: {
 		name: { value: '' },
 		doctype: { value: '', required: true },
-		name: { value: '', required: true },
+		docname: { value: '', required: true },
 		baseURL: { value: '' }
 	  }
 	});
   </script>
   
+
+<script  type="text/html" data-template-name="neo-update-doc">
   <div class="form-row">
-	<label for="doctype">Doctype</label>
-	<input type="text" name="doctype" id="doctype" placeholder="Ex: Customer" required="required">
+	<label for="node-input-doctype">Doctype</label>
+	<input type="text" name="node-input-doctype" id="node-input-doctype" placeholder="Ex: Customer" required="required">
   </div>
   <div class="form-row">
-	<label for="name">Document Name</label>
-	<input type="text" name="name" id="name" placeholder="Ex: CUST-0001">
+	<label for="node-input-docname">Document Name</label>
+	<input type="text" name="node-input-docname" id="node-input-docname" placeholder="Ex: CUST-0001">
   </div>
   <div class="form-row">
-	<label for="baseURL"">Base URL</label>
-	<input type="text" name="baseURL" id="baseURL" placeholder="https://neo.suaempresa.com.br">
+	<label for="node-input-baseURL"">Base URL</label>
+	<input type="text" name="node-input-baseURL" id="node-input-baseURL" placeholder="https://neo.suaempresa.com.br">
   </div>
+  </script>
   

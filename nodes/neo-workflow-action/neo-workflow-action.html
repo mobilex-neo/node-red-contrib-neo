@@ -11,27 +11,29 @@
 	  defaults: {
 		name: { value: '' },
 		doctype: { value: '', required: true },
-		name: { value: '', required: true },
+		docname: { value: '', required: true },
 		action: { value: '', required: true },
 		baseURL: { value: '' }
 	  }
 	});
   </script>
   
+
+<script  type="text/html" data-template-name="neo-workflow-action">
   <div class="form-row">
-	<label for="doctype">Doctype</label>
-	<input  type="text" name="doctype" id="doctype" placeholder="Ex: Customer" required="required"">
+	<label for="node-input-doctype">Doctype</label>
+	<input  type="text" name="node-input-doctype" id="node-input-doctype" placeholder="Ex: Customer" required="required"">
   </div>
   <div class="form-row">
-	<label for="name">Document Name</label>
-	<input type="text" name="name" id="name" placeholder="Ex: CUST-0001" required="required"">
+	<label for="node-input-docname">Document Name</label>
+	<input type="text" name="node-input-docname" id="node-input-docname" placeholder="Ex: CUST-0001" required="required"">
   </div>
   <div class="form-row">
-	<label for="action">Workflow Action</label>
-	<input type="text" name="action" placeholder="Ex: Aprovar, Rejeitar" id="action" required="required">
+	<label for="node-input-action">Workflow Action</label>
+	<input type="text" name="node-input-action" placeholder="Ex: Aprovar, Rejeitar" id="node-input-action" required="required">
   </div>
   <div class="form-row">
-	<label for="baseURL">Base URL</label>
-	<input type="text" name="baseURL" id="baseURL" placeholder="https://neo.suaempresa.com.br">
+	<label for="node-input-baseURL">Base URL</label>
+	<input type="text" name="node-input-baseURL" id="node-input-baseURL" placeholder="https://neo.suaempresa.com.br">
   </div>
-  
+</script>

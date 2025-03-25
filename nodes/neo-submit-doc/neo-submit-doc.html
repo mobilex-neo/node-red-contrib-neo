@@ -4,29 +4,33 @@
 	  color: '#F9CB9C',
 	  inputs: 1,
 	  outputs: 1,
-	  icon: 'send.png',
+	  icon: 'font-awesome/fa-envelope',
 	  label: function () {
 		return this.name || 'neo-submit-doc';
 	  },
 	  defaults: {
 		name: { value: '' },
 		doctype: { value: '', required: true },
-		name: { value: '', required: true },
+		docname: { value: '', required: true },
 		baseURL: { value: '' }
 	  }
 	});
   </script>
   
+
+
+<script  type="text/html" data-template-name="neo-submit-doc">
   <div class="form-row">
 	<label for="doctype">Doctype</label>
-	<input type="text" name="doctype" placeholder="Ex: Customer" id="doctype" required="required">
+	<input type="text" name="node-input-doctype" placeholder="Ex: Customer" id="node-input-doctype" required="required">
   </div>
   <div class="form-row">
-	<label for="name">Document Name</label>
-	<input type="text" name="name" placeholder="Ex: CUST-0001" id="name" required="required">
+	<label for="neo-input-docname">Document Name</label>
+	<input type="text" name="node-input-docname" placeholder="Ex: CUST-0001" id="node-input-docname" required="required">
   </div>
   <div class="form-row">
 	<label for="baseURL">Base URL</label>
-	<input type="text" name="baseURL" id="baseURL" placeholder="https://neo.suaempresa.com.br">
+	<input type="text" name="node-input-baseURL" id="node-input-baseURL" placeholder="https://neo.suaempresa.com.br">
   </div>
+  </script>	
   
