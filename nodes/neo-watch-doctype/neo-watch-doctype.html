@@ -1,0 +1,37 @@
+<script type="text/javascript">
+    RED.nodes.registerType('neo-watch-doctype', {
+      category: 'NEO',
+      color: '#FCE5CD',
+      inputs: 0,
+      outputs: 1,
+      icon: 'watch.png',
+      label: function () {
+        return this.name || 'neo-watch-doctype';
+      },
+      defaults: {
+        name: { value: '' },
+        doctype: { value: '', required: true },
+        interval: { value: 30 },
+        baseURL: { value: '' },
+        token: { value: '' }
+      }
+    });
+  </script>
+  
+  <div class="form-row">
+    <label>Doctype</label>
+    <input type="text" name="doctype">
+  </div>
+  <div class="form-row">
+    <label>Intervalo (s)</label>
+    <input type="number" name="interval" value="30">
+  </div>
+  <div class="form-row">
+    <label>Base URL</label>
+    <input type="text" name="baseURL">
+  </div>
+  <div class="form-row">
+    <label>Token (Cookie)</label>
+    <input type="text" name="token">
+  </div>
+  

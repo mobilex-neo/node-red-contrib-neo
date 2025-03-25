@@ -1,0 +1,32 @@
+<script type="text/javascript">
+	RED.nodes.registerType('neo-update-doc', {
+	  category: 'NEO',
+	  color: '#FFF2CC',
+	  inputs: 1,
+	  outputs: 1,
+	  icon: 'file.png',
+	  label: function () {
+		return this.name || 'neo-update-doc';
+	  },
+	  defaults: {
+		name: { value: '' },
+		doctype: { value: '', required: true },
+		name: { value: '', required: true },
+		baseURL: { value: '' }
+	  }
+	});
+  </script>
+  
+  <div class="form-row">
+	<label for="doctype">Doctype</label>
+	<input type="text" name="doctype" id="doctype" placeholder="Ex: Customer" required="required">
+  </div>
+  <div class="form-row">
+	<label for="name">Document Name</label>
+	<input type="text" name="name" id="name" placeholder="Ex: CUST-0001">
+  </div>
+  <div class="form-row">
+	<label for="baseURL"">Base URL</label>
+	<input type="text" name="baseURL" id="baseURL" placeholder="https://neo.suaempresa.com.br">
+  </div>
+  
