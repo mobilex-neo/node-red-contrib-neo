@@ -7,7 +7,8 @@ module.exports = function (RED) {
 
     node.on('input', async function (msg) {
       const doctype = config.doctype || msg.doctype;
-      const filters = msg.filters || {};
+      const filters = config.filters || msg.filters || {};
+      const fields = config.fields || msg.fields || ['name'];
       const token = msg.neo?.token;
       const baseURL = config.baseURL || msg.neo?.baseURL;
 
@@ -18,7 +19,7 @@ module.exports = function (RED) {
 
       try {
         const client = new NeoClient(baseURL, token);
-        const result = await client.query(doctype, filters);
+        const result = await client.query(doctype, filters, fields);
         msg.payload = result;
         node.send(msg);
       } catch (err) {

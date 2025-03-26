@@ -11,6 +11,8 @@
 	  defaults: {
 		name: { value: '' },
 		doctype: { value: '', required: true },
+		fields: { value: ''},
+		filters: { value: ''},
 		baseURL: { value: '' }
 	  }
 	});
@@ -23,8 +25,16 @@
 	<input type="text" name="node-input-doctype" placeholder="Ex: Item" id="doctype" required="required">
   </div>
   <div class="form-row">
-	<label for="baseURL">Base URL</label>
-	<input type="text" name="node-input-baseURL" placeholder="https://neo.suaempresa.com.br" id="baseURL">
+	<label for="node-input-filters">Filtros</label>
+	<input type="text" name="node-input-filters" placeholder='{"owner":"guest"}' id="node-input-filters">
+  </div>
+  <div class="form-row">
+	<label for="node-input-fields">Base URL</label>
+	<input type="text" name="node-input-fields" placeholder='["name","owner"]' id="node-input-fields">
+  </div>
+  <div class="form-row">
+	<label for="node-input-baseURL">Base URL</label>
+	<input type="text" name="node-input-baseURL" placeholder="https://neo.suaempresa.com.br" id="node-input-baseURL">
   </div>
   </script>
   
