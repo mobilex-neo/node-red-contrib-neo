@@ -7,8 +7,8 @@ module.exports = function (RED) {
 
     node.on('input', async function (msg) {
       const doctype = config.doctype || msg.doctype;
-      const filters = config.filters || msg.filters || {};
-      const fields = config.fields || msg.fields || ['name'];
+      const filters = JSON.parse(config.filters || msg.filters || '{}');
+      const fields = JSON.parse(config.fields || msg.fields || '["name"]');
       const token = msg.neo?.token;
       const baseURL = config.baseURL || msg.neo?.baseURL;
 
