@@ -4,7 +4,8 @@
         color: "#a6bbcf",
         defaults: {
             methodName: { value: "" },
-            httpMethod: { value: "GET" }
+            httpMethod: { value: "GET" },
+            payload: { value: "" }
         },
         inputs: 1,
         outputs: 1,
@@ -26,5 +27,9 @@
             <option value="GET">GET</option>
             <option value="POST">POST</option>
         </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-payload"><i class="fa fa-file-text-o"></i> Payload</label>
+        <textarea id="node-input-payload"></textarea>
     </div>
 </script>
