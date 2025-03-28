@@ -9,6 +9,7 @@ module.exports = function (RED) {
         const node = this;
         node.methodName = config.methodName;
         node.httpMethod = config.httpMethod || 'GET';
+        node.payload = JSON.parse(config.payload) || msg.payload || {};
 
         node.on('input', async function (msg) {
             try {
